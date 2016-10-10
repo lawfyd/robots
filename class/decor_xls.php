@@ -8,52 +8,67 @@ require_once ('robo.php');
 
 
 $rob = getDirectory();
+
 if(gettype($rob) == 'string') {
     if($rob == 'Файл не существует или не может быть загружен.') {
-        $xls = new PHPExcel();
-        $xls->setActiveSheetIndex(0);
-        // Получаем активный лист
-        $sheet = $xls->getActiveSheet();
-        // Подписываем лист
-        $sheet->setTitle('Лист 2');
-
-        // Вставляем текст в ячейку A1
-        $sheet->setCellValue("A1", '№');
-        $sheet->setCellValue("B1", 'Название проверки');
-        $sheet->setCellValue("C1", 'Статус');
-        $sheet->setCellValue("B3", 'Проверка наличия файла robots.txt');
-        $sheet->setCellValue("C3", 'Ошибка');
-
-        $xls->getActiveSheet()->getColumnDimension('B')->setWidth(55);
-
-
-        // Объединяем ячейки
-        //$sheet->mergeCells('A1:H1');
-
-        // Выравнивание текста
-        $sheet->getStyle('B1')->getAlignment()->setHorizontal(
-            PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        //заполняем таблицу
-
-        for($i = 3; $i < 9; $i++) {
-            $sheet->setCellValue("A$i", $i - 2);
-        }
-
-        header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
-        header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
-        header ( "Cache-Control: no-cache, must-revalidate" );
-        header ( "Pragma: no-cache" );
-        header ( "Content-type: application/vnd.ms-excel" );
-        header ( "Content-Disposition: attachment; filename=matrix.xls" );
-
-        // Выводим содержимое файла
-        $objWriter = new PHPExcel_Writer_Excel5($xls);
-        $objWriter->save('php://output');
+        printNotAll();die;
     }
-    echo $rob;
-    die;
-}else {
+}
+else {
+    printAll($rob);die;
+}
+
+function printNotAll() {
+    $xls = new PHPExcel();
+    $xls->setActiveSheetIndex(0);
+    // Получаем активный лист
+    $sheet = $xls->getActiveSheet();
+    // Подписываем лист
+    $sheet->setTitle('Лист 2');
+
+    // Вставляем текст в ячейку A1
+    $sheet->setCellValue("A1", '№');
+    $sheet->setCellValue("B1", 'Название проверки');
+    $sheet->setCellValue("C1", 'Статус');
+    $sheet->setCellValue("B3", 'Проверка наличия файла robots.txt');
+    $sheet->setCellValue("C3", 'Ошибка');
+
+    $xls->getActiveSheet()->getColumnDimension('B')->setWidth(55);
+
+
+    // Объединяем ячейки
+    //$sheet->mergeCells('A1:H1');
+
+    // Выравнивание текста
+    $sheet->getStyle('B1')->getAlignment()->setHorizontal(
+        PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+    //заполняем таблицу
+
+    for($i = 3; $i < 9; $i++) {
+        $sheet->setCellValue("A$i", $i - 2);
+    }
+    header_remove();
+    header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
+    header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
+    header ( "Cache-Control: no-cache, must-revalidate" );
+    header ( "Pragma: no-cache" );
+    header ( "Content-type: application/vnd.ms-excel" );
+    header ( "Content-Disposition: attachment; filename=matrix.xls" );
+
+    // Выводим содержимое файла
+    $objWriter = new PHPExcel_Writer_Excel5($xls);
+    $objWriter->save('php://output');
+    //var_dump(1);die;
+}
+//$rob = getDirectory();
+/*if(gettype($rob) == 'string') {
+    if($rob == 'Файл не существует или не может быть загружен.') {*/
+        
+//}else {
+
+function printAll($rob) {
+
     //var_dump($rob);die;
     $xls = new PHPExcel();
     $xls->setActiveSheetIndex(0);

@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+
+<div id='error'></div>
+<form enctype="multipart/form-data" method='post' action='class/decor_xls.php' id='square_form'>
+    <input name="data" value=""><br><br>
+    <input class="btn-success" value="Проверить" type="submit" id="submitFF">
+</form>
+
+
 <?php
 //get code response
 /*$url = 'http://www.example.com';
@@ -7,10 +22,7 @@
 print_r(get_headers($url, 1));*/
 
 
-$btn = '<input class="btn-success" value="Проверить" type="submit" id="submitFF">';
-$str = '<input name="data_input" value="">';
 
-echo "<form enctype=\"multipart/form-data\" method='post' action='class/decor_xls.php' id='square_form'> <fieldset> $str </fieldset> $btn </form>";
 /*
 
 try { // Вдруг чего случится
@@ -47,3 +59,10 @@ try { // Вдруг чего случится
 } catch (Exception $e) {
     echo $e->getMessage(); // Чтобы знать ошибку
 }*/
+?>
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+</html>

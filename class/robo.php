@@ -1,5 +1,7 @@
 <?php
 
+getDirectory();
+
 function getDataFromRobots($url) {
     try { 
 
@@ -28,18 +30,21 @@ function getDataFromRobots($url) {
 }
 
 function getDirectory() {
+    require_once "decor_xls.php";
+
     $arr_inf = array();
     $arr_full_inf = array();
     $check_host = 'host'; //1
     $cnt_host = 0; //2
     $check_sitemap = 'sitemap';
     $mark_sitemap = false;
-    $arr_direct = getDataFromRobots($_POST['data_input']);
+    $arr_direct = getDataFromRobots($_POST['data']);
     
     if(gettype($arr_direct) == 'string') {
-        return $arr_direct;
+        echo $arr_direct;die;
+        //return false;
     }
-    $file = new Xbb_RobotsTxt($_POST['data_input']);
+    $file = new Xbb_RobotsTxt($_POST['data']);
 
     $file_size = $file->file_size;
     foreach ($arr_direct as $value) {
@@ -69,5 +74,8 @@ function getDirectory() {
     $arr_full_inf['check_sitemap'] = $mark_sitemap ? 'Директива Sitemap указана' : 'Директива Sitemap не указана';
     $arr_full_inf['code_response'] = 200;
     //var_dump($arr_inf);die;
+    //var_dump($arr_inf);die;
+
+
     return [$arr_inf, $arr_full_inf];
 }
