@@ -11,10 +11,16 @@ $rob = getDirectory();
 
 if(gettype($rob) == 'string') {
     if($rob == 'Файл не существует или не может быть загружен.') {
+        echo '<table>
+                <tr><th>Название проверки</th><th>Статус</th><th>Текущее состояние</th></tr>
+                <tr><td>Проверка наличия файла robots.txt</td><td>Ошибка</td><td>Файл robots.txt не существует</td></tr>
+              </table>';die;
         printNotAll();die;
     }
+
 }
 else {
+    echo printTable($rob);
     printAll($rob);die;
 }
 
@@ -131,6 +137,34 @@ function printAll($rob) {
     $objWriter = new PHPExcel_Writer_Excel5($xls);
     $objWriter->save('php://output');
 
+}
+
+function printTable($rob) {
+    $arr0['robots'] = 'Проверка наличия файла robots.txt';
+    $arr0['host'] = 'Проверка указания директивы Host';
+    $arr0['cnt_host'] = 'Проверка количества директив Host, прописанных в файле';
+    $arr0['size_file'] = 'Проверка размера файла robots.txt';
+    $arr0['check_sitemap'] = 'Проверка указания директивы Sitemap';
+    $arr0['code_response'] = 'Проверка кода ответа сервера для файла robots.txt';
+
+    $str = "<table>
+            <tr><th>Название проверки</th><th>Статус</th><th>Текущее состояние</th></tr>
+            
+            ";
+    $arr1 = $rob[0];
+    $arr2 = $rob[1];
+    $tr1 = '<tr>';
+    $tr2 = '<tr>';
+    $keys = ['robots', 'host', 'cnt_host','size_file','check_sitemap','code_response'];
+    foreach ($keys as $key) {
+        $tr1 .= "<tr><td>" . $arr0[$key] . "</td>";
+        $tr1 .= "<td>" . $arr1[$key] . "</td>";
+        $tr1 .= "<td>" . $arr2[$key] . "</td></tr>";
+    }
+    $str .= $tr1;
+    $str .= "</table>";
+    echo $str;die;
+    
 }
 
 

@@ -50,7 +50,11 @@ class Xbb_RobotsTxt {
             throw new Exception('Невозможно распарсить URL "' . $url . '"');
         }
         if (empty($arUrl['scheme']) || empty($arUrl['host'])) {
-            $er = 'Введенный URL "' . $url . '" не содержит схемы и имени хоста';
+                $er = '<br>Введенный URL "' . $url . '" не содержит схемы и имени хоста';
+            /*$er = '<table>
+                        <tr><th>Название проверки</th><th>Статус</th><th>Текущее состояние</th></tr>
+                        <tr><td>Проверка наличия файла robots.txt</td><td>Ошибка</td><td>Введенный URL "' . $url . '" не содержит схемы и имени хоста</td></tr>
+                        </table>';*/
             //$er = 'Введенный URL не содержит схемы и имени хоста';
             //return 'Введенный URL не содержит схемы и имени хоста';
             throw new Exception($er);

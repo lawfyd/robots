@@ -41,8 +41,11 @@ function getDirectory() {
     $arr_direct = getDataFromRobots($_POST['data']);
     
     if(gettype($arr_direct) == 'string') {
+        if($arr_direct == 'Файл не существует или не может быть загружен.') {
+            return $arr_direct;
+        }
         echo $arr_direct;die;
-        //return false;
+
     }
     $file = new Xbb_RobotsTxt($_POST['data']);
 
@@ -70,7 +73,7 @@ function getDirectory() {
     $arr_full_inf['robots'] = 'Файл robots.txt присутствует';
     $arr_full_inf['host'] = $cnt_host ? 'Директива Host указана' : 'В файле robots.txt не указана директива Host';
     $arr_full_inf['cnt_host'] = $cnt_host ? 'В файле есть ' . $cnt_host . ' дирестив Host' : 'в файле нет директив Host';
-    $arr_full_inf['size_file'] = $file_size > 32 ? 'Размер файла: ' . $file_size . 'байт больше чем 32 байта' : 'Размер файла: ' . $file_size;
+    $arr_full_inf['size_file'] = $file_size > 32 ? 'Размер файла: ' . $file_size . ' байт больше чем 32 байта' : 'Размер файла: ' . $file_size;
     $arr_full_inf['check_sitemap'] = $mark_sitemap ? 'Директива Sitemap указана' : 'Директива Sitemap не указана';
     $arr_full_inf['code_response'] = 200;
     //var_dump($arr_inf);die;

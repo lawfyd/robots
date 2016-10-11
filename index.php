@@ -2,16 +2,15 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
-
-<div id='error'></div>
 <form enctype="multipart/form-data" method='post' action='class/decor_xls.php' id='square_form'>
     <input name="data" value=""><br><br>
     <input class="btn-success" value="Проверить" type="submit" id="submitFF">
 </form>
-
+<div id="error"></div>
 
 <?php
 //get code response

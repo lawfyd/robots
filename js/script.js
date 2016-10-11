@@ -4,30 +4,22 @@ $(document).ready(function () {
         event.preventDefault();
         var data = $('form input').val();
         $.ajax({
-            url:'class/robo.php',
-            data:'data=' + data,
+            url: 'class/robo.php',
+            data: 'data=' + data,
             //dataType:'json',
-            type:'post',
+            type: 'post',
+            success: function (data) {
+                console.log(data);
 
-            //получаем данные от сервера и выводим их
-            success:function (html) {
-                $.ajax({
-                    type:'POST',
-                    url:"decor_xls.php",
-                    data: {},
-                    dataType:'json'}).done(function(data){
-                    var $a = $("<a>");
-                    $a.attr("href",data.file);
-                    $("body").append($a);
-                    $a.attr("download","file.xls");
-                    $a[0].click();
-                    $a.remove();
-                });
-                    
-        }});
-    //});
+                $("#error").html(data);
+                
+                
+            }
 
-});}
+        })
+    })
+});
+
 
 
 
@@ -65,3 +57,36 @@ $(document).ready(function () {
 
 */
 
+
+/*
+ $(document).ready(function () {
+
+ $("#submitFF").click(function () {
+ event.preventDefault();
+ var data = $('form input').val();
+ $.ajax({
+ url:'class/robo.php',
+ data:'data=' + data,
+ //dataType:'json',
+ type:'post',
+
+ //получаем данные от сервера и выводим их
+ success:function (html) {
+ $.ajax({
+ type:'POST',
+ url:"decor_xls.php",
+ data: {},
+ dataType:'json'}).done(function(data){
+ var $a = $("<a>");
+ $a.attr("href",data.file);
+ $("body").append($a);
+ $a.attr("download","file.xls");
+ $a[0].click();
+ $a.remove();
+ });
+
+ }});
+ //});
+
+ });}
+*/
